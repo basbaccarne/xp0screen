@@ -12,7 +12,7 @@ This repo describes the set-up of an autonomous installation to play movies in a
 ### Physical build   
 * The Raspberry Pi is connected to the screen using UBC (screen power, use seperate power for higher brightness) and a HDMI cable
 * The Raspberry Pi is powered over USB through a timer switch that auto shuts down and boots the pi each day
-* The Raspberry Pi is attached to the screen using a 3D printed VESA mount (adapted from [ChooseCool](https://www.thingiverse.com/thing:3808242))
+* The Raspberry Pi is attached to the screen using a 3D printed ```VESA``` mount (adapted from [ChooseCool](https://www.thingiverse.com/thing:3808242))
 
 ### Computational set-up   
 The lowest level of video playing on raspi used to be [OMXplayer](https://github.com/popcornmix/omxplayer). Unfortunately the OMX team has shifted focus to developing VLC, so this version is new deprecated (doesn't work on bullseye or bookworm). Hence, it has become more difficult to run videos from the CLI only OS systems (Raspi Lite). Now , it is best to use [MPV](https://github.com/mpv-player/mpv).
