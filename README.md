@@ -39,3 +39,53 @@ The lowest level of video playing on raspi used to be [OMXplayer](https://github
   ```console
   mpv --fs --loop=inf test.mp4
   ```
+
+If you have a Raspi dedicated to looping that video (in this case: the pi is automatically powered down and powered up at the end and beginning of each day). This is how you create a custom boot that directly opens the mpv player and runs the video in a loop:  
+
+**Step 1. Create a service**
+```console
+sudo nano /etc/systemd/system/expo.service
+```
+add the following content in the file:   
+*(change Restart=always to Restart=no if you want to work on the prototype)*
+```
+[Unit]
+Description=Play Video on Boot
+After=graphical.target
+
+[Service]
+User=expo
+ExecStart=/usr/bin/mpv --fs --loop=inf /home/expo/test.mp4
+Restart=always
+Environment=DISPLAY=:0
+StandardInput=tty
+StandardOutput=tty
+
+[Install]
+WantedBy=multi-user.target
+```
+enable this service:
+```console
+sudo systemctl enable expo.service
+```
+start this service:
+```console
+sudo systemctl start expo.service
+```
+If you want to restart the scrit:
+```console
+sudo systemctl restart expo.service
+```
+To monitor the logs
+> Live
+```console
+journalctl -u expo.service -f
+```
+> Last x minutes
+```console
+sudo journalctl -u expo.service --since "5 minutes ago"
+```
+> status
+```console
+sudo systemctl status mpv-video.service
+```
