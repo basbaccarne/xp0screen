@@ -15,6 +15,7 @@ This repo describes the set-up of an autonomous installation to play movies in a
 * The Raspberry Pi is attached to the screen using a 3D printed ```VESA``` mount (adapted from [ChooseCool](https://www.thingiverse.com/thing:3808242))
 
 ### Computational set-up   
+#### Video
 The lowest level of video playing on raspi used to be [OMXplayer](https://github.com/popcornmix/omxplayer). Unfortunately the OMX team has shifted focus to developing VLC, so this version is new deprecated (doesn't work on bullseye or bookworm). Hence, it has become more difficult to run videos from the CLI only OS systems (Raspi Lite). Now , it is best to use [MPV](https://github.com/mpv-player/mpv).
 
 * Install a fresh Raspi OS
@@ -39,7 +40,7 @@ The lowest level of video playing on raspi used to be [OMXplayer](https://github
   ```console
   mpv --fs --loop=inf test.mp4
   ```
-
+#### Booting
 If you have a Raspi dedicated to looping that video (in this case: the pi is automatically powered down and powered up at the end and beginning of each day). This is how you create a custom boot that directly opens the mpv player and runs the video in a loop:  
 
 * Create a service
@@ -98,6 +99,7 @@ If you have a Raspi dedicated to looping that video (in this case: the pi is aut
   sudo systemctl status mpv-video.service
   ```
 
+#### Power management
 You might want to set-up a cleaner way to shutdown and restart the pi, since just powering it down might damage the SD card over time.
 * Option 1: add a shutdown script that shuts the pi down before the power is cut (check [crontabguru](https://crontab.guru/) for set-up)
   
