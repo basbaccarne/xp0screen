@@ -38,7 +38,7 @@ The lowest level of video playing on raspi used to be [OMXplayer](https://github
 * Check code to run perpetual video loops (```--f``` makes it play fullscreen, ```--loop=inf``` makes it loop forever)
   
   ```console
-  mpv --fs --loop=inf test.mp4
+  mpv --fs --geometry=100%x100% --loop=inf test.mp4
   ```
 #### Booting
 If you have a Raspi dedicated to looping that video (in this case: the pi is automatically powered down and powered up at the end and beginning of each day). This is how you create a custom boot that directly opens the mpv player and runs the video in a loop:  
