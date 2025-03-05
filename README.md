@@ -86,7 +86,7 @@ In this project, we will use systemd to launch the videoplayer at boot and cront
 
 * Add the following code
  (change Restart=always to Restart=no if you want to work on the prototype)
-  ```
+  ```ini
   [Unit]
   Description=Autostart Video Player
   After=graphical.target
