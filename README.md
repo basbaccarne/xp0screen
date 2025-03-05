@@ -107,7 +107,7 @@ In this project, we will use systemd to launch the videoplayer at boot and cront
   Group=pi
   Environment=DISPLAY=:0
   Type=idle
-  ExecStart=/usr/bin/python3 /home/pi/videoplayer.py
+  ExecStart=/usr/bin/python3 /home/pi/videoplayer.py > /home/pi/Desktop/videoplayer.log 2>&1
   WorkingDirectory=/home/pi
   StandardOutput=journal
   StandardError=journal
