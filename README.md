@@ -75,11 +75,12 @@ subprocess.call(["mpv", "--fs", "--geometry=100%x100%", "--loop=inf", "/home/pi/
 
 #### Booting
 If you have a Raspi dedicated to looping that video (in this case: the pi is automatically powered down and powered up at the end and beginning of each day). This is how you create a custom boot that directly opens the mpv player and runs the video in a loop:  
+* [good resource](https://www.dexterindustries.com/howto/run-a-program-on-your-raspberry-pi-at-startup/)
 
 There are several options to do this:
-* ```rc.local```: low level, simple, for lightwait startup scripts without GUI (deprecated). Works good in headless mode (without a screen).
+* ```rc.local```: low level, simple, for lightwait startup scripts without GUI (deprecated). Works good in headless mode (without a screen). The pi runs this script at boot, before all other services.
 * ```.bashrc```: runs after login, starts only if a terminal session starts
-* ```init.d```: well documented, Unix classic, good for background processed
+* ```init.d```: well documented, Unix classic, good for background processes
 * ```Systemd```: go to method in most cases. advanced error logging and allows GUI targetting
 * ```Contab```: simple, good for lightweight tasks and recurring tasks (sheduling)
 
@@ -88,6 +89,7 @@ In this project, we will use systemd to launch the videoplayer at boot and cront
 
 
 * Create a new ```systemd``` service file:
+  ()
   ```console
   sudo nano /etc/systemd/system/videoplayer.service
   ```
@@ -104,6 +106,7 @@ In this project, we will use systemd to launch the videoplayer at boot and cront
   User=pi
   Group=pi
   Environment=DISPLAY=:0
+  Type=idle
   ExecStart=/usr/bin/python3 /home/pi/videoplayer.py
   WorkingDirectory=/home/pi
   StandardOutput=journal
