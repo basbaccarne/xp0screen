@@ -47,11 +47,12 @@ For enhanced anthropomorphic fun (oh yeah, and maybe some bebugging), we can dev
 ```console
 sudo apt-get install espeak
 ```
-Next we're going to integrate everything in a python script that uses the module ```subprocess``` to execute shell comands.
+Next we're going to integrate everything in a python script that uses the module ```subprocess.call``` to execute shell comands.
 
 Create a python script (e.g. ```sudo nano videoplayer.py```) and add the following python code:
 
 ```python
+#! /usr/bin/env python
 import subprocess
 import time
 
