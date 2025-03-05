@@ -38,7 +38,7 @@ The lowest level of video playing on raspi used to be [OMXplayer](https://github
 * Check code to run perpetual video loops (```--f``` makes it play fullscreen, ```--loop=inf``` makes it loop forever, --geometry=100%x100% makes sure the video plays fullscreen on a pi monitor)
   
   ```console
-  mpv --fs --geometry=100%x100% --loop=inf home/pi/Videos/test.mp4
+  mpv --fs --geometry=100%x100% --loop=inf /home/pi/Videos/test.mp4
   ```
 
 #### Adding some fun
