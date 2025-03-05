@@ -18,7 +18,7 @@ This repo describes the set-up of an autonomous installation to play movies in a
 ### Physical build   
 * The Raspberry Pi is connected to the screen using UBC (screen power, use seperate power for higher brightness) and a HDMI cable
 * The Raspberry Pi is powered over USB through a timer switch that auto shuts down and boots the pi each day
-* The Raspberry Pi is attached to the screen using a 3D printed ```VESA``` mount (adapted from [ChooseCool](https://www.thingiverse.com/thing:3808242))
+* The Raspberry Pi is attached to the screen using a 3D printed ```VESA``` [mount](https://a360.co/4igQT9M) (adapted from [ChooseCool](https://www.thingiverse.com/thing:3808242))
 
 ### Computational set-up   
 #### Video
