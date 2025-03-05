@@ -35,11 +35,43 @@ The lowest level of video playing on raspi used to be [OMXplayer](https://github
 
 * Add video files to the Pi (WinSCP or USB stick)
   
-* Check code to run perpetual video loops (```--f``` makes it play fullscreen, ```--loop=inf``` makes it loop forever)
+* Check code to run perpetual video loops (```--f``` makes it play fullscreen, ```--loop=inf``` makes it loop forever, --geometry=100%x100% makes sure the video plays fullscreen on a pi monitor)
   
   ```console
   mpv --fs --geometry=100%x100% --loop=inf home/pi/Videos/test.mp4
   ```
+
+### Adding some fun
+For enhanced anthropomorphic fun (oh yeah, and maybe some bebugging), we can develop a launch script that first says something and then plays opens the full screen video. We're going to do this with ```espeak```:
+
+```console
+sudo apt-get install espeak
+```
+Next we're going to integrate everything in a python script that uses the module ```subprocess``` to execute shell comands.
+
+Create a python script (e.g. ```sudo nano videoplayer.py```) and add the following python code:
+
+```python
+import subprocess
+import time
+
+# Wait until the GUI taskbar (lxpanel) is running
+while True:
+    try:
+        output = subprocess.check_output("pgrep lxpanel", shell=True)
+        if output.strip():  # If we get a valid PID, the GUI is ready
+            break
+    except subprocess.CalledProcessError:
+        time.sleep(2)  # Wait and retry
+
+# Speak the welcome message
+subprocess.call(["espeak", "This is Industrial Design Engineering. Be amazed, be inspired, change the world."], stderr=subprocess.DEVNULL)
+
+# Play the movie in full screen
+subprocess.call(["mpv", "--fs", "--geometry=100%x100%", "--loop=inf", "/home/pi/Videos/drone.mp4"])
+```
+
+
 #### Booting
 If you have a Raspi dedicated to looping that video (in this case: the pi is automatically powered down and powered up at the end and beginning of each day). This is how you create a custom boot that directly opens the mpv player and runs the video in a loop:  
 
