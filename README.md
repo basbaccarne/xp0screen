@@ -41,7 +41,7 @@ The lowest level of video playing on raspi used to be [OMXplayer](https://github
   mpv --fs --geometry=100%x100% --loop=inf home/pi/Videos/test.mp4
   ```
 
-### Adding some fun
+#### Adding some fun
 For enhanced anthropomorphic fun (oh yeah, and maybe some bebugging), we can develop a launch script that first says something and then plays opens the full screen video. We're going to do this with ```espeak```:
 
 ```console
@@ -75,6 +75,17 @@ subprocess.call(["mpv", "--fs", "--geometry=100%x100%", "--loop=inf", "/home/pi/
 
 #### Booting
 If you have a Raspi dedicated to looping that video (in this case: the pi is automatically powered down and powered up at the end and beginning of each day). This is how you create a custom boot that directly opens the mpv player and runs the video in a loop:  
+
+There are several options to do this:
+* ```rc.local```: low level, simple, for lightwait startup scripts without GUI (deprecated)
+* ```.bashrc```: runs after login, starts only if a terminal session starts
+* ```init.d```: well documented, Unix classic, good for background processed
+* ```Systemd```: go to method in most cases. advanced error logging and allows GUI targetting
+* ``Contab```: simple, good for lightweight tasks and recurring tasks (sheduling)
+
+In this project, we will use systemd to launch the videoplayer at boot and crontab to shutdown before the power gets turned off.
+
+
 
 * Create a shell script
   ```console
