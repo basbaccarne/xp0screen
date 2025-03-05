@@ -54,16 +54,6 @@ Create a python script (e.g. ```sudo nano videoplayer.py```) and add the followi
 ```python
 #! /usr/bin/env python
 import subprocess
-import time
-
-# Wait until the GUI taskbar (lxpanel) is running
-while True:
-    try:
-        output = subprocess.check_output("pgrep lxpanel", shell=True)
-        if output.strip():  # If we get a valid PID, the GUI is ready
-            break
-    except subprocess.CalledProcessError:
-        time.sleep(2)  # Wait and retry
 
 # Speak the welcome message
 subprocess.call(["espeak", "This is Industrial Design Engineering. Be amazed, be inspired, change the world."], stderr=subprocess.DEVNULL)
