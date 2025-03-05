@@ -4,10 +4,16 @@ This repo describes the set-up of an autonomous installation to play movies in a
 - [ ] [Raspberri Pi](https://www.raspberrypi.com/products/) (optimal: Zero 2W or 3)
 - [ ] [Micro SD Card](https://be.farnell.com/transcend/ts2gusdc/card-sd-micro-2gb/dp/2290242)
 - [ ] [Raspberry Pi Monitor](https://be.farnell.com/raspberry-pi/sc0940/rpi-monitor-red-white/dp/4568688)
-- [ ] USB-C cable
+- [ ] [USB-C charger](https://be.farnell.com/multicomp-pro/mc000992/usb-cable-3-1-type-a-type-c-plug/dp/2498938?MER=sy-me-pd-mi-alte) (the USB power of the raspi3B is insufficient for the monitor)
 - [ ] [HDMI cable](https://be.farnell.com/raspberry-pi/t7689ax/cable-micro-hdmi-hdmi-plug-1m/dp/3107125)
+- [ ] [Micro HDMI adapter](https://be.farnell.com/startech/hdadfm5in/adapter-hdmi-to-micro-hdmi-5in/dp/3764999)
 - [ ] [Raspberry Pi power supply](https://be.farnell.com/multicomp-pro/mp004971/adapter-ac-dc-5-1v-3a/dp/3058875)
 - [ ] [Timer Switch](https://be.farnell.com/brennenstuhl/mz-20/timer-24hour-mechanica-euro-plug/dp/7966466)
+- [ ] [Short M2.5 bolts](https://be.farnell.com/tr-fastenings/m2-56krstmcz100/pozi-csk-head-machine-screw-steel/dp/2770703)
+- [ ] [M2.5 x 12 bolts](https://be.farnell.com/tr-fastenings/m2-512krstmcz100/pozi-csk-head-machine-screw-steel/dp/2770705)
+- [ ] [M2.5 x 11 standoffs](https://be.farnell.com/ettinger/05-02-113/spacer-m2-5x11-ni/dp/1466760)
+- [ ] [M4 x 16 bolts](https://be.farnell.com/multicomp-pro/mp006530/screw-flat-csk-head-pozidriv-m4/dp/3666723)
+- [ ] [M6 x 30 bolt, nut & washer](https://be.farnell.com/tr-fastenings/m6-30-hh88bl-z100/bolt-hex-head-steel-m6x30-pk100/dp/2771655)
 
 ### Physical build   
 * The Raspberry Pi is connected to the screen using UBC (screen power, use seperate power for higher brightness) and a HDMI cable
