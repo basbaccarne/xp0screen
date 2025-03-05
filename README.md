@@ -77,7 +77,7 @@ subprocess.call(["mpv", "--fs", "--geometry=100%x100%", "--loop=inf", "/home/pi/
 If you have a Raspi dedicated to looping that video (in this case: the pi is automatically powered down and powered up at the end and beginning of each day). This is how you create a custom boot that directly opens the mpv player and runs the video in a loop:  
 
 There are several options to do this:
-* ```rc.local```: low level, simple, for lightwait startup scripts without GUI (deprecated)
+* ```rc.local```: low level, simple, for lightwait startup scripts without GUI (deprecated). Works good in headless mode (without a screen).
 * ```.bashrc```: runs after login, starts only if a terminal session starts
 * ```init.d```: well documented, Unix classic, good for background processed
 * ```Systemd```: go to method in most cases. advanced error logging and allows GUI targetting
