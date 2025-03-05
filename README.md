@@ -1,7 +1,7 @@
 # XP0SCREEN   
 This repo describes the set-up of an autonomous installation to play movies in a perpetual loop. Perfect for demo stands etc.   
 ### Components
-- [ ] [Raspberri Pi](https://www.raspberrypi.com/products/) (optimal: Zero 2W or 3)
+- [ ] [Raspberri Pi](https://www.raspberrypi.com/products/) (optimal: Zero 2W or 3 for video, raspi4 for screen power)
 - [ ] [Micro SD Card](https://be.farnell.com/transcend/ts2gusdc/card-sd-micro-2gb/dp/2290242)
 - [ ] [Raspberry Pi Monitor](https://be.farnell.com/raspberry-pi/sc0940/rpi-monitor-red-white/dp/4568688)
 - [ ] [USB-C charger](https://be.farnell.com/multicomp-pro/mc000992/usb-cable-3-1-type-a-type-c-plug/dp/2498938?MER=sy-me-pd-mi-alte) (the USB power of the raspi3B is insufficient for the monitor)
