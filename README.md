@@ -38,13 +38,32 @@ The lowest level of video playing on raspi used to be [OMXplayer](https://github
 * Check code to run perpetual video loops (```--f``` makes it play fullscreen, ```--loop=inf``` makes it loop forever)
   
   ```console
-  mpv --fs --geometry=100%x100% --loop=inf test.mp4
+  mpv --fs --geometry=100%x100% --loop=inf home/pi/Videos/test.mp4
   ```
 #### Booting
 If you have a Raspi dedicated to looping that video (in this case: the pi is automatically powered down and powered up at the end and beginning of each day). This is how you create a custom boot that directly opens the mpv player and runs the video in a loop:  
 
-* Create a service
+* Create a shell script
+  ```console
+  sudo nano /home/pi/videoloop.sh
+  ```
+
+* Enter commando's
+  ```bash
+  #!/bin/bash
+  mpv --fs --geometry=100%x100% --loop=inf /home/pi/Videos/drone.mp4
+  ```
+
+* Make the shell script executable
+  ```console
+  sudo chmod +x /home/pi/videoloop.sh
+  ```
+* test the shell script
+  ```console
+  ./home/pi/videoloop.sh
+  ```
   
+* Create a service
   ```console
   sudo nano /etc/systemd/system/expo.service
   ```
@@ -54,19 +73,19 @@ If you have a Raspi dedicated to looping that video (in this case: the pi is aut
 
   ```
   [Unit]
-  Description=Play Video on Boot
+  Description=Play Video on boot
   After=graphical.target
   
   [Service]
-  User=expo
-  ExecStart=/usr/bin/mpv --fs --loop=inf /home/expo/test.mp4
+  User=pi
+  ExecStart=/home/pi/videoloop.sh
   Restart=always
   Environment=DISPLAY=:0
-  StandardInput=tty
-  StandardOutput=tty
+  Environment=XAUTHORITY=/home/comon/.Xauthority
+  Environment=XDG_RUNTIME_DIR=/run/user/1000
   
   [Install]
-  WantedBy=multi-user.target
+  WantedBy=graphical.target
   ```
 
 * enable this service:
@@ -81,7 +100,7 @@ If you have a Raspi dedicated to looping that video (in this case: the pi is aut
   sudo systemctl start expo.service
   ```
 
-* If you want to restart the scrit:
+* If you want to restart the script:
   ```console
   sudo systemctl restart expo.service
   ```
