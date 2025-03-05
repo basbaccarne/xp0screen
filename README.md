@@ -82,7 +82,7 @@ There are several options to do this:
 * ```.bashrc```: runs after login, starts only if a terminal session starts
 * ```init.d```: well documented, Unix classic, good for background processes
 * ```Systemd```: go to method in most cases. advanced error logging and allows GUI targetting
-* ```Contab```: simple, good for lightweight tasks and recurring tasks (sheduling)
+* ```Crontab```: simple, good for lightweight tasks and recurring tasks (sheduling)
 
 In this project, we will use systemd to launch the videoplayer at boot and crontab to shutdown before the power gets turned off.
 
