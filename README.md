@@ -42,7 +42,7 @@ The lowest level of video playing on raspi used to be [OMXplayer](https://github
   ```
 
 #### Adding some fun
-For enhanced anthropomorphic fun (oh yeah, and maybe some bebugging), we can develop a launch script that first says something and then plays opens the full screen video. We're going to do this with ```espeak```:
+For enhanced anthropomorphic fun (oh yeah, and maybe some debugging), we can develop a launch script that first says something and then plays opens the full screen video. We're going to do this with ```espeak```:
 
 ```console
 sudo apt-get install espeak
@@ -87,79 +87,59 @@ In this project, we will use systemd to launch the videoplayer at boot and cront
 
 
 
-* Create a shell script
+* Create a new ```systemd``` service file:
   ```console
-  sudo nano /home/pi/videoloop.sh
+  sudo nano /etc/systemd/system/videoplayer.service
   ```
 
-* Enter commando's
-  ```bash
-  #!/bin/bash
-  mpv --fs --geometry=100%x100% --loop=inf /home/pi/Videos/drone.mp4
-  ```
-
-* Make the shell script executable
-  ```console
-  sudo chmod +x /home/pi/videoloop.sh
-  ```
-* test the shell script
-  ```console
-  ./home/pi/videoloop.sh
-  ```
-  
-* Create a service
-  ```console
-  sudo nano /etc/systemd/system/expo.service
-  ```
-  
-* add the following content in the file:   
-  (change Restart=always to Restart=no if you want to work on the prototype)
-
+* Add the following code
+ (change Restart=always to Restart=no if you want to work on the prototype)
   ```
   [Unit]
-  Description=Play Video on boot
+  Description=Autostart Video Player
   After=graphical.target
+  Wants=graphical.target
   
   [Service]
   User=pi
-  ExecStart=/home/pi/videoloop.sh
-  Restart=always
+  Group=pi
   Environment=DISPLAY=:0
-  Environment=XAUTHORITY=/home/comon/.Xauthority
-  Environment=XDG_RUNTIME_DIR=/run/user/1000
+  ExecStart=/usr/bin/python3 /home/pi/videoplayer.py
+  WorkingDirectory=/home/pi
+  StandardOutput=journal
+  StandardError=journal
+  Restart=always
+  RestartSec=5
   
   [Install]
   WantedBy=graphical.target
   ```
-
+  
 * enable this service:
   
   ```console
-  sudo systemctl enable expo.service
+  sudo systemctl daemon-reload
+  sudo systemctl enable videoplayer.service
   ```
 
-* start this service:
+* start this service to test it:
   
   ```console
-  sudo systemctl start expo.service
+  sudo systemctl start videoplayer.service
   ```
 
-* If you want to restart the script:
+* to stop the service:
   ```console
-  sudo systemctl restart expo.service
+  sudo systemctl disable videoplayer.service
   ```
+
 * To monitor the logs
-  > Live
   ```console
-  journalctl -u expo.service -f
-  ```
-  > Last x minutes
-  ```console
-  sudo journalctl -u expo.service --since "5 minutes ago"
+  journalctl -u videoplayer.service --no-pager --reverse | less
   ```
   > status
   ```console
-  sudo systemctl status mpv-video.service
+  sudo systemctl status videoplayer.service
   ```
 
 #### Power management
