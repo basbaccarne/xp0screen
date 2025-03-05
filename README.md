@@ -55,11 +55,11 @@ Create a python script (e.g. ```sudo nano videoplayer.py```) and add the followi
 #! /usr/bin/env python
 import subprocess
 
-# Speak the welcome message
-subprocess.call(["espeak", "This is Industrial Design Engineering. Be amazed, be inspired, change the world."], stderr=subprocess.DEVNULL)
+# Speak the welcome message (-a sets volume of the text to speech on 10)
+subprocess.call(["espeak", "-a", "10", "This is Industrial Design Engineering. Be amazed, be inspired, change the world."], stderr=subprocess.DEVNULL)
 
-# Play the movie in full screen
-subprocess.call(["mpv", "--fs", "--geometry=100%x100%", "--loop=inf", "/home/pi/Videos/drone.mp4"])
+# Play the movie in full screen (volume of 20 seems to match text to speech volume of 10)
+subprocess.call(["mpv", "--fs", "--geometry=100%x100%", "--loop=inf","--volume=20",  "/home/pi/Videos/drone.mp4"])
 ```
 
 
