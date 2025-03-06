@@ -143,17 +143,10 @@ In this project, we will use systemd to launch the videoplayer at boot and cront
 
 #### Disabling sleep
 If the screen runs for a long time, the auto sleep function might cause the screen to blank.
-* Edit the config file
-  ```console
-  sudo nano /boot/firmware/config.txt
-  ```
-* add the following lines
-  ```ini
-  hdmi_blanking=0
-  hdmi_force_hotplug=1
-  hdmi_ignore_cec=1
-  consoleblank=0
-  ```
+
+* Edit the cmdline.txt file: sudo nano /boot/firmware/cmdline.txt.
+* Add consoleblank=0 at the end of the line.
+
 #### Power management
 You might want to set-up a cleaner way to shutdown and restart the pi, since just powering it down might damage the SD card over time.
 * Option 1: add a shutdown script that shuts the pi down before the power is cut (check [crontabguru](https://crontab.guru/) for set-up)
