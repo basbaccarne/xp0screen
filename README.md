@@ -160,3 +160,11 @@ You might want to set-up a cleaner way to shutdown and restart the pi, since jus
   ```
 
 * Option 2: use a power management HAT such as the [Pimeroni OnOff SHIM](https://shop.pimoroni.com/products/onoff-shim?variant=41102600138)
+
+# Change movie
+* Add keyboard & mouse
+* CTRL-C
+* `sudo systemctl disable videoplayer.service`
+* Change file (now: drone.mp4)
+* sudo systemctl start videoplayer.service
+
