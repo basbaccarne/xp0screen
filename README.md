@@ -1,9 +1,9 @@
 # XP0SCREEN   
 This repo describes the set-up of an autonomous installation to play movies in a perpetual loop. Perfect for demo stands etc.   
 ### Components
-- [x] [Raspberri Pi](https://www.raspberrypi.com/products/) (optimal: Zero 2W or 3 for video, raspi4 for screen power)
+- [x] [Raspberri Pi](https://www.raspberrypi.com/products/) (optimal: Zero 2W or 3 for video, raspi4+ for screen power)
 - [x] [Micro SD Card](https://be.farnell.com/transcend/ts2gusdc/card-sd-micro-2gb/dp/2290242)
-- [x] [Raspberry Pi Monitor](https://be.farnell.com/raspberry-pi/sc0940/rpi-monitor-red-white/dp/4568688)
+- [x] [Raspberry Pi Monitor](https://be.farnell.com/raspberry-pi/sc0940/rpi-monitor-red-white/dp/4568688) (there is also a cool black variant)
 - [ ] [USB-C charger](https://be.farnell.com/multicomp-pro/mc000992/usb-cable-3-1-type-a-type-c-plug/dp/2498938?MER=sy-me-pd-mi-alte) (the USB power of the raspi3B is insufficient for the monitor, raspi 5 also fails with the default keyboard)
 - [x] [HDMI cable](https://be.farnell.com/raspberry-pi/t7689ax/cable-micro-hdmi-hdmi-plug-1m/dp/3107125)
 - [x] [Micro HDMI adapter](https://be.farnell.com/startech/hdadfm5in/adapter-hdmi-to-micro-hdmi-5in/dp/3764999)
@@ -16,7 +16,7 @@ This repo describes the set-up of an autonomous installation to play movies in a
 - [ ] [M5 x 35 bolt, nut & washer](https://be.farnell.com/multicomp-pro/mp014356/bolt-hex-head-m5-x-35-pvdf/dp/4550762)
 
 ### Physical build   
-* The Raspberry Pi is connected to the screen using UBC (screen power, use seperate power for higher brightness) and a HDMI cable
+* The Raspberry Pi is connected to the screen using USB-C (screen power, use seperate power for higher brightness) and a HDMI cable
 * The Raspberry Pi is powered over USB through a timer switch that auto shuts down and boots the pi each day
 * The Raspberry Pi is attached to the screen using a 3D printed ```VESA``` [mount](https://a360.co/4igQT9M) (adapted from [ChooseCool](https://www.thingiverse.com/thing:3808242))
 
