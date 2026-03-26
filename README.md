@@ -68,6 +68,12 @@ subprocess.call(["espeak", "-a", "10", "This is Industrial Design Engineering. B
 subprocess.call(["mpv", "--fs", "--geometry=100%x100%", "--loop=inf","--volume=20",  "/home/pi/Videos/drone.mp4"])
 ```
 
+#### Getting a file on the pi headless
+If you don't have a screen and keyboard you can copy a file when you're on the same network as the pi using ```scp``` (secure copy protocol). You can use this command in the terminal of your computer (not on the pi) to copy a file from your computer to the pi. Change the path to the file you want to copy and the IP address of the pi accordingly.
+
+```console
+scp "C:\Users\yourname\folder\drone.mp4" pi@172.31.185.247:/home/pi/
+```
 
 #### Booting
 If you have a Raspi dedicated to looping that video (in this case: the pi is automatically powered down and powered up at the end and beginning of each day). This is how you create a custom boot that directly opens the mpv player and runs the video in a loop:  
