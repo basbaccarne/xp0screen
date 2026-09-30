@@ -109,6 +109,8 @@ In this project, we will use systemd to launch the videoplayer at boot and cront
   Group=pi
   Environment=DISPLAY=:0
   Type=idle
+  # Wait until the desktop is up, otherwise mpv starts too early at boot and nothing is shown
+  ExecStartPre=/bin/sh -c 'until [ -S /run/user/1000/wayland-0 ] || [ -S /tmp/.X11-unix/X0 ]; do sleep 1; done'
   ExecStart=/usr/bin/python3 /home/pi/videoplayer.py
   WorkingDirectory=/home/pi
   StandardOutput=file:/home/pi/Desktop/videoplayer.log
@@ -120,6 +122,8 @@ In this project, we will use systemd to launch the videoplayer at boot and cront
   WantedBy=graphical.target
   ```
   
+  > `ExecStartPre` waits for the desktop session, since the service can start before it exists at boot. The user id `1000` is the default for user `pi` (check with `id -u`). Do not set `WAYLAND_DISPLAY` here: it makes mpv use its Wayland backend, which blanks the screen and freezes the video on the Pi. Note that in a unit file `%` must be written as `%%` (e.g. `--geometry=100%%x100%%`).
+
 * enable this service:
   
   ```console
@@ -133,7 +137,12 @@ In this project, we will use systemd to launch the videoplayer at boot and cront
   sudo systemctl start videoplayer.service
   ```
 
-* to stop the service:
+* to stop the service (until next boot; do NOT use `disable`, that removes the autostart):
+  ```console
+  sudo systemctl stop videoplayer.service
+  ```
+
+* to permanently remove autostart (only when you really want the booth to stop playing at boot):
   ```console
   sudo systemctl disable videoplayer.service
   ```
@@ -154,23 +163,35 @@ If the screen runs for a long time, the auto sleep function might cause the scre
 * Add consoleblank=0 at the end of the line.
 
 #### Power management
-You might want to set-up a cleaner way to shutdown and restart the pi, since just powering it down might damage the SD card over time.
-* Option 1: add a shutdown script that shuts the pi down before the power is cut (check [crontabguru](https://crontab.guru/) for set-up)
-  
+Just cutting the power to the pi corrupts the SD card over time (symptoms: the pi still gets an IP and answers ping, but ssh is refused and the video service doesn't start). The installation therefore powers itself down first, and only afterwards the timer switch cuts the power:
+
+| Time | What happens |
+|------|--------------|
+| 18:00 | cron shuts the pi down cleanly (`shutdown -h now`) |
+| 18:15 | the timer switch cuts the power (the pi has been off for a while) |
+| 08:00 | the timer switch connects the power again, the pi boots and `videoplayer.service` starts the video |
+
+* Option 1: schedule the shutdown with cron, at least 10 minutes before the timer switch cuts the power (check [crontabguru](https://crontab.guru/) for set-up). Use root's crontab so no password is needed:
+
   ```console
   sudo crontab -e
   ```
 
   ```
-  0 23 * * * sudo shutdown -h now
+  0 18 * * * /usr/sbin/shutdown -h now
   ```
+
+  Set the timer switch to cut the power a bit later (e.g. 18:15) and to restore it in the morning (e.g. 08:00). Adapt the times to your opening hours. Check the pi clock with `date` (set the timezone with `sudo raspi-config` > Localisation Options > Timezone), otherwise the shutdown runs at the wrong time.
+
+  To test without waiting: `sudo shutdown -h +1` (cancel with `sudo shutdown -c`), and check that the pi stays off until you cut and restore the power.
 
 * Option 2: use a power management HAT such as the [Pimeroni OnOff SHIM](https://shop.pimoroni.com/products/onoff-shim?variant=41102600138)
 
 # Change movie
 * Attach keyboard & mouse
 * press `CTRL+C`
-* Open terminal and enter `sudo systemctl disable videoplayer.service` (arrows up show history)
+* Open terminal and enter `sudo systemctl stop videoplayer.service` (arrows up show history). Do not use `disable`: the video would no longer start on boot.
 * Change file (now: Videos/drone.mp4)
 * Go back to terminal and enter `sudo systemctl start videoplayer.service` (arrows up show history)
+* Check that autostart is still on: `systemctl is-enabled videoplayer.service` should print `enabled` (if not: `sudo systemctl enable videoplayer.service`)
 
