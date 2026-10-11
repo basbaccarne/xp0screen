@@ -51,6 +51,7 @@ Get the pi IP with `ifconfig`
 **3. Clone this repo and run the auto configuration:**
 
 ```console
+ssh pi@IP_ADDRESS
 git clone https://github.com/basbaccarne/xp0screen
 cd xp0screen
 sudo ./autoconfig.sh 18:00

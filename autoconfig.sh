@@ -26,6 +26,10 @@ SHUTDOWN_TIME="${1:-18:00}"
 SHUTDOWN_HOUR=$((10#${BASH_REMATCH[1]}))
 SHUTDOWN_MIN=$((10#${BASH_REMATCH[2]}))
 
+# How the shutdown time is spoken, e.g. "18 hours" or "18 hours 30"
+SPOKEN_TIME="$SHUTDOWN_HOUR hours"
+[ "$SHUTDOWN_MIN" -ne 0 ] && SPOKEN_TIME="$SPOKEN_TIME $SHUTDOWN_MIN"
+
 echo "==> Installing packages (mpv, espeak)"
 apt-get update
 apt-get install -y mpv espeak
@@ -38,7 +42,7 @@ cat > "$SCRIPT" <<PYEOF
 import subprocess
 
 # Speak the welcome message (-a sets volume of the text to speech on 10)
-subprocess.call(["espeak", "-a", "10", "This is Industrial Design Engineering. Be amazed, be inspired, change the world."], stderr=subprocess.DEVNULL)
+subprocess.call(["espeak", "-a", "10", "Video player is live. This system will automatically shut down at $SPOKEN_TIME."], stderr=subprocess.DEVNULL)
 
 # Play the movie in full screen (volume of 20 seems to match text to speech volume of 10)
 subprocess.call(["mpv", "--fs", "--geometry=100%x100%", "--loop=inf", "--volume=20", "$VIDEO"])
