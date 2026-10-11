@@ -45,7 +45,7 @@ import subprocess
 subprocess.call(["espeak", "-a", "10", "Video player is live. This system will automatically shut down at $SPOKEN_TIME."], stderr=subprocess.DEVNULL)
 
 # Play the movie in full screen (volume of 20 seems to match text to speech volume of 10)
-subprocess.call(["mpv", "--fs", "--geometry=100%x100%", "--loop=inf", "--volume=20", "$VIDEO"])
+subprocess.call(["mpv", "--fs", "--geometry=100%x100%", "--loop=inf", "--volume=20", "--no-osc", "--no-osd-bar", "--osd-level=0", "--cursor-autohide=always", "$VIDEO"])
 PYEOF
 chown "$PLAYER_USER:$PLAYER_GROUP" "$SCRIPT"
 chmod 755 "$SCRIPT"

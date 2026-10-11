@@ -117,6 +117,9 @@ mpv --fs --geometry=100%x100% --loop=inf /home/pi/Desktop/video.mp4
 | `--fs` | play fullscreen |
 | `--loop=inf` | loop forever |
 | `--geometry=100%x100%` | fill a Pi monitor |
+| `--no-osc` | hide the on-screen controller (timeline and buttons) |
+| `--no-osd-bar`, `--osd-level=0` | hide the seek bar and other on-screen messages |
+| `--cursor-autohide=always` | hide the mouse pointer |
 
 ## Launch script
 
